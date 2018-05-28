@@ -1,6 +1,6 @@
 package ru.saidgadjiev.ormnext.support.database_type;
 
-import ru.saidgadjiev.ormnext.core.db.BaseDatabaseType;
+import ru.saidgadjiev.ormnext.core.database_type.BaseDatabaseType;
 
 /**
  * Created by said on 11.03.2018.

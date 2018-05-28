@@ -1,7 +1,8 @@
 package ru.saidgadjiev.ormnext.support.database_type;
 
-import ru.saidgadjiev.ormnext.core.db.BaseDatabaseType;
-import ru.saidgadjiev.ormnext.core.query.core.AttributeDefinition;
+import ru.saidgadjiev.ormnext.core.database_type.BaseDatabaseType;
+import ru.saidgadjiev.ormnext.core.query.visitor.element.AttributeDefinition;
+import ru.saidgadjiev.ormnext.support.data_persister.SerialTypeDataPersister;
 
 public class PGDatabaseType extends BaseDatabaseType {
     @Override
@@ -21,7 +22,7 @@ public class PGDatabaseType extends BaseDatabaseType {
 
     @Override
     public String getTypeSqlPresent(AttributeDefinition attributeDefinition) {
-        if (attributeDefinition.getDataType() == 8) {
+        if (attributeDefinition.getDataType() == SerialTypeDataPersister.SERIAL) {
             return "SERIAL";
         }
 

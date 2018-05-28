@@ -1,6 +1,6 @@
 package ru.saidgadjiev.ormnext.support.database_type;
 
-import ru.saidgadjiev.ormnext.core.db.BaseDatabaseType;
+import ru.saidgadjiev.ormnext.core.database_type.BaseDatabaseType;
 
 public class SQLiteDatabaseType extends BaseDatabaseType {
 
