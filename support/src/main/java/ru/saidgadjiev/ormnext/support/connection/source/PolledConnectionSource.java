@@ -1,7 +1,8 @@
-package ru.saidgadjiev.ormnext.support.connection_source;
+package ru.saidgadjiev.ormnext.support.connection.source;
 
-import ru.saidgadjiev.ormnext.core.connection_source.ConnectionSource;
-import ru.saidgadjiev.ormnext.core.connection_source.DatabaseConnection;
+import ru.saidgadjiev.ormnext.core.connection.DatabaseConnection;
+import ru.saidgadjiev.ormnext.core.connection.DatabaseConnectionImpl;
+import ru.saidgadjiev.ormnext.core.connection.source.ConnectionSource;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -10,16 +11,32 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by said on 10.02.2018.
+ * Connection source which retrieve connections from connection pool.
+ *
+ * @author said gadjiev
  */
 public class PolledConnectionSource implements ConnectionSource<Connection> {
 
+    /**
+     * Data source.
+     */
     private DataSource dataSource;
 
+    /**
+     * Available connections.
+     */
     private Set<DatabaseConnection<Connection>> available = new HashSet<>();
 
+    /**
+     * In use connections.
+     */
     private Set<DatabaseConnection<Connection>> inUse = new HashSet<>();
 
+    /**
+     * Create a new instance.
+     *
+     * @param dataSource target data source.
+     */
     public PolledConnectionSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -44,16 +61,22 @@ public class PolledConnectionSource implements ConnectionSource<Connection> {
         available.add(connection);
     }
 
+    /**
+     * Create a new database connection.
+     *
+     * @return a new connection
+     * @throws SQLException any SQL exceptions
+     */
     private DatabaseConnection<Connection> createNew() throws SQLException {
         return new DatabaseConnectionImpl(dataSource.getConnection());
     }
 
     @Override
     public void close() throws SQLException {
-        for (DatabaseConnection<Connection> connection: inUse) {
+        for (DatabaseConnection<Connection> connection : inUse) {
             connection.close();
         }
-        for (DatabaseConnection<Connection> connection: available) {
+        for (DatabaseConnection<Connection> connection : available) {
             connection.close();
         }
     }

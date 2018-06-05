@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Benchmark model.
+ * Benchmark domain.
+ *
+ * @author said gadjiev
  */
 public class UserProfile {
 

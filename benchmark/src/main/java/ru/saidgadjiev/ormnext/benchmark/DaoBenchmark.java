@@ -1,34 +1,3 @@
-/*
- * Copyright (c) 2014, Oracle America, Inc.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *  * Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- *
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *
- *  * Neither the name of Oracle nor the names of its contributors may be used
- *    to endorse or promote products derived from this software without
- *    specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
- * THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 package ru.saidgadjiev.ormnext.benchmark;
 
 import org.apache.commons.lang.RandomStringUtils;
@@ -39,14 +8,13 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.postgresql.ds.PGPoolingDataSource;
 import ru.saidgadjiev.ormnext.benchmark.domain.Order;
 import ru.saidgadjiev.ormnext.benchmark.domain.UserProfile;
-import ru.saidgadjiev.ormnext.core.connection_source.ConnectionSource;
 import ru.saidgadjiev.ormnext.core.dao.Session;
 import ru.saidgadjiev.ormnext.core.dao.SessionManager;
 import ru.saidgadjiev.ormnext.core.dao.SessionManagerBuilder;
 import ru.saidgadjiev.ormnext.core.field.DataPersisterManager;
-import ru.saidgadjiev.ormnext.support.connection_source.PolledConnectionSource;
-import ru.saidgadjiev.ormnext.support.data_persister.SerialTypeDataPersister;
-import ru.saidgadjiev.ormnext.support.database_type.PGDatabaseType;
+import ru.saidgadjiev.ormnext.support.connection.source.PolledConnectionSource;
+import ru.saidgadjiev.ormnext.support.datapersister.SerialTypeDataPersister;
+import ru.saidgadjiev.ormnext.support.dialect.PgDialect;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -60,6 +28,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Orm next benchmarks.
+ *
+ * @author said gadjiev
  */
 @SuppressWarnings("magicnumber")
 public class DaoBenchmark {
@@ -106,19 +76,23 @@ public class DaoBenchmark {
 
         /**
          * Set up.
+         *
+         * @throws SQLException any SQL exceptions
          */
         @Setup(Level.Trial)
-        public void doSetUp() {
+        public void doSetUp() throws SQLException {
             sessionManager = new SessionManagerBuilder()
                     .entities(UserProfile.class, Order.class)
-                    .databaseType(new PGDatabaseType())
+                    .databaseType(new PgDialect())
                     .connectionSource(new PolledConnectionSource(dataSource()))
                     .build();
         }
 
         /**
          * Tear down.
-         * @throws SQLException when close connection source {@link ConnectionSource#close()}
+         *
+         * @throws SQLException when close connection source
+         * {@link ru.saidgadjiev.ormnext.core.connection.source.ConnectionSource#close}
          */
         @TearDown
         public void doTearDown() throws SQLException {
@@ -127,7 +101,8 @@ public class DaoBenchmark {
     }
 
     /**
-     * Dao query for all benchmark {@link ru.saidgadjiev.ormnext.core.dao.BaseDao#queryForAll(Class)}.
+     * Dao query for all benchmark {@link ru.saidgadjiev.ormnext.core.dao.Dao#queryForAll}.
+     *
      * @param daoState dao state {@link DaoState}
      * @return return result
      * @throws SQLException any SQL exceptions
@@ -146,6 +121,7 @@ public class DaoBenchmark {
 
     /**
      * Direct access query for all benchmark.
+     *
      * @param directAccessState state {@link DirectAccessState}
      * @return result
      * @throws Exception any exceptions
@@ -193,6 +169,7 @@ public class DaoBenchmark {
 
     /**
      * Fill db.
+     *
      * @throws SQLException any SQL exceptions
      */
     private static void fillDb() throws SQLException {
@@ -227,6 +204,7 @@ public class DaoBenchmark {
 
     /**
      * Create data source.
+     *
      * @return pg data source
      */
     private static DataSource dataSource() {
@@ -244,18 +222,21 @@ public class DaoBenchmark {
 
     /**
      * Create session manager.
+     *
      * @return session manager
+     * @throws SQLException any SQL exceptions
      */
-    private static SessionManager sessionManager() {
+    private static SessionManager sessionManager() throws SQLException {
         return new SessionManagerBuilder()
                 .entities(UserProfile.class, Order.class)
-                .databaseType(new PGDatabaseType())
+                .databaseType(new PgDialect())
                 .connectionSource(new PolledConnectionSource(dataSource()))
                 .build();
     }
 
     /**
      * Start benchmark.
+     *
      * @param args args
      * @throws Exception any exceptions
      */

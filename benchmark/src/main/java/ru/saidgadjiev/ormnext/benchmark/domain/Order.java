@@ -5,7 +5,9 @@ import ru.saidgadjiev.ormnext.core.field.*;
 import java.util.Date;
 
 /**
- * Benchmark model.
+ * Benchmark domain.
+ *
+ * @author said gadjiev
  */
 public class Order {
 

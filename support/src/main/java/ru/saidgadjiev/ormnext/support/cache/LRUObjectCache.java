@@ -6,7 +6,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@SuppressWarnings("CPD-START")
+/**
+ * Cache with LRU caching algorithm.
+ *
+ * @param <ID> cache key type
+ * @param <T>  cache value type
+ * @author said gadjiev
+ */
 public class LRUObjectCache<ID, T> implements ObjectCache<ID, T> {
 
     /**
@@ -14,14 +20,28 @@ public class LRUObjectCache<ID, T> implements ObjectCache<ID, T> {
      */
     private static final int DEFAULT_CACHE_SIZE = 16;
 
-    private Map<Class<T> , Map<ID, T>> cache = new ConcurrentHashMap<>();
+    /**
+     * Cached classes map.
+     */
+    private Map<Class<T>, Map<ID, T>> cache = new ConcurrentHashMap<>();
 
+    /**
+     * Max cache size.
+     */
     private int maxSize;
 
+    /**
+     * Create a new instance.
+     *
+     * @param maxSize target max size
+     */
     public LRUObjectCache(int maxSize) {
         this.maxSize = maxSize;
     }
 
+    /**
+     * Create a new instance with default max size.
+     */
     public LRUObjectCache() {
         this.maxSize = DEFAULT_CACHE_SIZE;
     }
@@ -40,7 +60,6 @@ public class LRUObjectCache<ID, T> implements ObjectCache<ID, T> {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public T get(Class<T> tClass, ID id) {
         Map<ID, T> objectCache = cache.get(tClass);
@@ -95,6 +114,12 @@ public class LRUObjectCache<ID, T> implements ObjectCache<ID, T> {
         return objectCache.size();
     }
 
+    /**
+     * Create a new LRU map.
+     *
+     * @param maxSize target max size
+     * @return created map with LRU remove algorithm
+     */
     private Map<ID, T> createLRUMap(int maxSize) {
         return new LinkedHashMap<ID, T>() {
             @Override

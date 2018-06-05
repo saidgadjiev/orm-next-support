@@ -1,12 +1,14 @@
 package ru.saidgadjiev.ormnext.benchmark.domain;
 
-import ru.saidgadjiev.ormnext.core.field.data_persister.ColumnConverter;
+import ru.saidgadjiev.ormnext.core.field.datapersister.ColumnConverter;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
 /**
  * Timestamp to date converter / date to timestamp converter.
+ *
+ * @author said gadjiev
  */
 public class TimestampToDate implements ColumnConverter<Timestamp, Date> {
 

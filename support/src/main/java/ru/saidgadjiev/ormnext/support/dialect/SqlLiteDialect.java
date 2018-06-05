@@ -1,8 +1,13 @@
-package ru.saidgadjiev.ormnext.support.database_type;
+package ru.saidgadjiev.ormnext.support.dialect;
 
-import ru.saidgadjiev.ormnext.core.database_type.BaseDatabaseType;
+import ru.saidgadjiev.ormnext.core.dialect.BaseDialect;
 
-public class SQLiteDatabaseType extends BaseDatabaseType {
+/**
+ * SqlLite database dialect.
+ *
+ * @author said gadjiev
+ */
+public class SqlLiteDialect extends BaseDialect {
 
     @Override
     public String getPrimaryKeyDefinition(boolean generated) {

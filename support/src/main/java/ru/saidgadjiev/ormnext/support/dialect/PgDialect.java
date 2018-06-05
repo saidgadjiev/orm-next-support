@@ -1,10 +1,16 @@
-package ru.saidgadjiev.ormnext.support.database_type;
+package ru.saidgadjiev.ormnext.support.dialect;
 
-import ru.saidgadjiev.ormnext.core.database_type.BaseDatabaseType;
+import ru.saidgadjiev.ormnext.core.dialect.BaseDialect;
 import ru.saidgadjiev.ormnext.core.query.visitor.element.AttributeDefinition;
-import ru.saidgadjiev.ormnext.support.data_persister.SerialTypeDataPersister;
+import ru.saidgadjiev.ormnext.support.datapersister.SerialTypeDataPersister;
 
-public class PGDatabaseType extends BaseDatabaseType {
+/**
+ * PostgreSql database dialect.
+ *
+ * @author said gadjiev
+ */
+public class PgDialect extends BaseDialect {
+
     @Override
     public String getPrimaryKeyDefinition(boolean generated) {
         return " PRIMARY KEY";

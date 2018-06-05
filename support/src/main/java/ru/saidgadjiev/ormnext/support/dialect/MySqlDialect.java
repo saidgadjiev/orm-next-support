@@ -1,8 +1,14 @@
-package ru.saidgadjiev.ormnext.support.database_type;
+package ru.saidgadjiev.ormnext.support.dialect;
 
-import ru.saidgadjiev.ormnext.core.database_type.BaseDatabaseType;
 
-public class H2DatabaseType extends BaseDatabaseType {
+import ru.saidgadjiev.ormnext.core.dialect.BaseDialect;
+
+/**
+ * MySql database dialect.
+ *
+ * @author said gadjiev
+ */
+public class MySqlDialect extends BaseDialect {
 
     @Override
     public String getPrimaryKeyDefinition(boolean generated) {
