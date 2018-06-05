@@ -1,0 +1,8 @@
+ru\saidgadjiev\ormnext\support\cache\LRUObjectCache$1.class
+ru\saidgadjiev\ormnext\support\datapersister\SerialTypeDataPersister.class
+ru\saidgadjiev\ormnext\support\dialect\MySqlDialect.class
+ru\saidgadjiev\ormnext\support\dialect\SqlLiteDialect.class
+ru\saidgadjiev\ormnext\support\cache\LRUObjectCache.class
+ru\saidgadjiev\ormnext\support\connection\source\JDBCConnectionSource.class
+ru\saidgadjiev\ormnext\support\connection\source\PolledConnectionSource.class
+ru\saidgadjiev\ormnext\support\dialect\PgDialect.class
