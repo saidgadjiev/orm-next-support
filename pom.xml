@@ -2,9 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.saidgadjiev.ormnext.support</groupId>
+    <groupId>ru.saidgadjiev.orm-next</groupId>
     <artifactId>orm-next-support</artifactId>
-    <packaging>pom</packaging>
     <version>1.1-SNAPSHOT</version>
 
     <name>orm-next-support</name>
@@ -277,9 +276,12 @@
         </profile>
     </profiles>
 
-    <modules>
-        <module>support</module>
-        <module>benchmark</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>ru.saidgadjiev.orm-next</groupId>
+            <artifactId>orm-next-core</artifactId>
+            <version>1.2-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
