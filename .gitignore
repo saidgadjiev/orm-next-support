@@ -83,3 +83,5 @@ fabric.properties
 ### Example user template template
 ### Example user template
 
+#Maven
+target/
