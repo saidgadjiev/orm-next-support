@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * Connection source which retrieve connections from {@link DriverManager}.
  *
- * @author said gadjiev
+ * @author Said Gadjiev
  */
 public class JDBCConnectionSource implements ConnectionSource<Connection> {
 

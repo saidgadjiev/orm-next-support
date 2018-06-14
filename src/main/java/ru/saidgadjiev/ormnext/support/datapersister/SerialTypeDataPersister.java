@@ -1,21 +1,24 @@
 package ru.saidgadjiev.ormnext.support.datapersister;
 
+import ru.saidgadjiev.ormnext.core.dialect.BaseDialect;
+import ru.saidgadjiev.ormnext.core.field.SqlType;
 import ru.saidgadjiev.ormnext.core.field.datapersister.IntegerDataPersister;
+import ru.saidgadjiev.ormnext.core.query.visitor.element.AttributeDefinition;
 
 /**
  * Persister for PostgreSql SERIAL TYPE.
  *
- * @author said gadjiev
+ * @author Said Gadjiev
  */
 public class SerialTypeDataPersister extends IntegerDataPersister {
 
-    /**
-     * Data type number.
-     */
-    public static final int SERIAL = 12;
+    @Override
+    public SqlType getOrmNextSqlType() {
+        return SqlType.OTHER;
+    }
 
     @Override
-    public int getDataType() {
-        return SERIAL;
+    public String getOtherTypeSql(BaseDialect baseDialect, AttributeDefinition def) {
+        return "SERIAL";
     }
 }

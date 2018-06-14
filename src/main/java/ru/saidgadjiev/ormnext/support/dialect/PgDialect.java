@@ -2,18 +2,22 @@ package ru.saidgadjiev.ormnext.support.dialect;
 
 import ru.saidgadjiev.ormnext.core.dialect.BaseDialect;
 import ru.saidgadjiev.ormnext.core.query.visitor.element.AttributeDefinition;
-import ru.saidgadjiev.ormnext.support.datapersister.SerialTypeDataPersister;
 
 /**
  * PostgreSql database dialect.
  *
- * @author said gadjiev
+ * @author Said Gadjiev
  */
 public class PgDialect extends BaseDialect {
 
     @Override
-    public String getPrimaryKeyDefinition(boolean generated) {
-        return " PRIMARY KEY";
+    public String getDatabaseName() {
+        return "postgresql";
+    }
+
+    @Override
+    public String getPrimaryKeyDefinition(AttributeDefinition attributeDefinition) {
+        return " SERIAL PRIMARY KEY";
     }
 
     @Override
@@ -27,11 +31,7 @@ public class PgDialect extends BaseDialect {
     }
 
     @Override
-    public String getTypeSqlPresent(AttributeDefinition attributeDefinition) {
-        if (attributeDefinition.getDataType() == SerialTypeDataPersister.SERIAL) {
-            return "SERIAL";
-        }
-
-        return super.getTypeSqlPresent(attributeDefinition);
+    public String getGeneratedDefinition(AttributeDefinition attributeDefinition) {
+        return " SERIAL ";
     }
 }

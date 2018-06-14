@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Connection source which retrieve connections from connection pool.
  *
- * @author said gadjiev
+ * @author Said Gadjiev
  */
 public class PolledConnectionSource implements ConnectionSource<Connection> {
 

@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @param <ID> cache key type
  * @param <T>  cache value type
- * @author said gadjiev
+ * @author Said Gadjiev
  */
 public class LRUObjectCache<ID, T> implements ObjectCache<ID, T> {
 
