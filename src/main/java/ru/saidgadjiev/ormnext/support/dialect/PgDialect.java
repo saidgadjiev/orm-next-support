@@ -17,7 +17,7 @@ public class PgDialect extends BaseDialect {
 
     @Override
     public String getPrimaryKeyDefinition(AttributeDefinition attributeDefinition) {
-        return " SERIAL PRIMARY KEY";
+        return getTypeSql(attributeDefinition) + " PRIMARY KEY";
     }
 
     @Override
@@ -32,6 +32,6 @@ public class PgDialect extends BaseDialect {
 
     @Override
     public String getGeneratedDefinition(AttributeDefinition attributeDefinition) {
-        return " SERIAL ";
+        return getTypeSql(attributeDefinition);
     }
 }
