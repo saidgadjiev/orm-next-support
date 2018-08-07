@@ -4,7 +4,7 @@
 
     <groupId>ru.saidgadjiev.ormnext</groupId>
     <artifactId>ormnext-support</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8</version>
 
     <name>ormnext-support</name>
     <description>Library which contains implementations additional things for OrmNext library</description>
@@ -22,7 +22,7 @@
         <connection>scm:git:https://github.com/saidgadjiev/orm-next-support</connection>
         <developerConnection>scm:git:https://github.com/saidgadjiev/orm-next-support</developerConnection>
         <url>https://github.com/saidgadjiev/orm-next-support</url>
-        <tag>HEAD</tag>
+        <tag>ormnext-support-1.8</tag>
     </scm>
 
     <developers>
